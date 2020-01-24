@@ -9,10 +9,11 @@ namespace Flame\Modules\Template;
 
 use Latte\Engine;
 use Nette\InvalidStateException;
-use Nette\Object;
+use Nette\SmartObject;
 
-class Helper extends Object
+class Helper
 {
+	use SmartObject;
 
 	/**
 	 * @param Engine $engine

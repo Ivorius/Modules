@@ -10,12 +10,13 @@ namespace Flame\Modules\Application\Routers;
 use Nette\Application\IRouter;
 use Nette\Application\Request;
 use Nette\InvalidStateException;
-use Nette\Object;
 use Nette\Reflection\ClassType;
+use Nette\SmartObject;
 use Nette;
 
-class RouteMock extends Object implements IRouteMock, IRouter
+class RouteMock implements IRouteMock, IRouter
 {
+	use SmartObject;
 
 	/** @var string  */
 	public $class;

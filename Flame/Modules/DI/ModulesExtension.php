@@ -189,7 +189,7 @@ class ModulesExtension extends Nette\DI\CompilerExtension
 			foreach ($helpers as $name => $helper) {
 				if (is_string($helper) && !is_string($name)) {
 					$provider = $builder->addDefinition($this->prefix('helperProvider.' . $config->getUniqueId() . '.' . $name))
-						->setClass($helper);
+						->setType($helper);
 
 					$latteFactory->addSetup('Flame\Modules\Template\Helper::register($service, ?)', array($provider));
 
@@ -229,7 +229,7 @@ class ModulesExtension extends Nette\DI\CompilerExtension
 		$router = $builder->getDefinition('router');
 
 		/** @var Nette\DI\CompilerExtension $extension */
-		$name = $this->addRouteService($extension->getReflection()->name);
+		$name = $this->addRouteService((new \ReflectionClass($extension))->name);
 		$router->addSetup('offsetSet', array(NULL, $name));
 	}
 
@@ -243,7 +243,7 @@ class ModulesExtension extends Nette\DI\CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('routeService.' . $serviceName))
-			->setClass($class)
+			->setType($class)
 			->setInject(TRUE);
 
 		$builder->addDefinition('routerServiceFactory.' . $serviceName)
